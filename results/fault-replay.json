@@ -1,0 +1,1290 @@
+{
+  "budget_units": "synthetic declared maximum per attempt; not dollars or tokens",
+  "fencing_probe": {
+    "audit": [
+      {
+        "clock": 0.0,
+        "detail": "",
+        "event": "created",
+        "seq": 1,
+        "task_id": null,
+        "token": 0
+      },
+      {
+        "clock": 1.0,
+        "detail": "old-worker",
+        "event": "claimed",
+        "seq": 2,
+        "task_id": "normalize",
+        "token": 1
+      },
+      {
+        "clock": 2.0,
+        "detail": "pending",
+        "event": "lease_expired",
+        "seq": 3,
+        "task_id": "normalize",
+        "token": 1
+      },
+      {
+        "clock": 2.0,
+        "detail": "replacement",
+        "event": "claimed",
+        "seq": 4,
+        "task_id": "normalize",
+        "token": 2
+      },
+      {
+        "clock": 2.2,
+        "detail": "",
+        "event": "completed",
+        "seq": 5,
+        "task_id": "normalize",
+        "token": 2
+      }
+    ],
+    "new_token": 2,
+    "old_token": 1,
+    "snapshot": {
+      "account": {
+        "budget": 30,
+        "id": "race",
+        "reserved": 0,
+        "spent": 4
+      },
+      "pending_outbox": 1,
+      "tasks": [
+        {
+          "attempts": 2,
+          "cost": 2,
+          "id": "normalize",
+          "state": "succeeded",
+          "token": 2
+        },
+        {
+          "attempts": 0,
+          "cost": 3,
+          "id": "summary",
+          "state": "pending",
+          "token": 0
+        },
+        {
+          "attempts": 0,
+          "cost": 2,
+          "id": "flags",
+          "state": "pending",
+          "token": 0
+        },
+        {
+          "attempts": 0,
+          "cost": 1,
+          "id": "package",
+          "state": "pending",
+          "token": 0
+        }
+      ]
+    },
+    "stale_completion_rejected": true
+  },
+  "measurement": "operation counts, not elapsed time or model quality",
+  "protocol": "five fixed scenarios; one fault at task summary; deterministic logical clock",
+  "scenarios": [
+    {
+      "durable": {
+        "adapter_calls": 4,
+        "audit": [
+          {
+            "clock": 0.0,
+            "detail": "",
+            "event": "created",
+            "seq": 1,
+            "task_id": null,
+            "token": 0
+          },
+          {
+            "clock": 1.0,
+            "detail": "worker",
+            "event": "claimed",
+            "seq": 2,
+            "task_id": "normalize",
+            "token": 1
+          },
+          {
+            "clock": 1.1,
+            "detail": "",
+            "event": "completed",
+            "seq": 3,
+            "task_id": "normalize",
+            "token": 1
+          },
+          {
+            "clock": 2.0,
+            "detail": "worker",
+            "event": "claimed",
+            "seq": 4,
+            "task_id": "summary",
+            "token": 1
+          },
+          {
+            "clock": 2.1,
+            "detail": "",
+            "event": "completed",
+            "seq": 5,
+            "task_id": "summary",
+            "token": 1
+          },
+          {
+            "clock": 3.0,
+            "detail": "worker",
+            "event": "claimed",
+            "seq": 6,
+            "task_id": "flags",
+            "token": 1
+          },
+          {
+            "clock": 3.1,
+            "detail": "",
+            "event": "completed",
+            "seq": 7,
+            "task_id": "flags",
+            "token": 1
+          },
+          {
+            "clock": 4.0,
+            "detail": "worker",
+            "event": "claimed",
+            "seq": 8,
+            "task_id": "package",
+            "token": 1
+          },
+          {
+            "clock": 4.1,
+            "detail": "",
+            "event": "completed",
+            "seq": 9,
+            "task_id": "package",
+            "token": 1
+          }
+        ],
+        "charged_units": 8,
+        "completed_tasks": 4,
+        "deduplicated_deliveries": 0,
+        "duplicate_effects": 0,
+        "effect_attempts": 4,
+        "executed_units": 8,
+        "reserved_units": 0,
+        "snapshot": {
+          "account": {
+            "budget": 30,
+            "id": "experiment",
+            "reserved": 0,
+            "spent": 8
+          },
+          "pending_outbox": 0,
+          "tasks": [
+            {
+              "attempts": 1,
+              "cost": 2,
+              "id": "normalize",
+              "state": "succeeded",
+              "token": 1
+            },
+            {
+              "attempts": 1,
+              "cost": 3,
+              "id": "summary",
+              "state": "succeeded",
+              "token": 1
+            },
+            {
+              "attempts": 1,
+              "cost": 2,
+              "id": "flags",
+              "state": "succeeded",
+              "token": 1
+            },
+            {
+              "attempts": 1,
+              "cost": 1,
+              "id": "package",
+              "state": "succeeded",
+              "token": 1
+            }
+          ]
+        },
+        "trace": [
+          {
+            "attempt": 1,
+            "event": "adapter_executed",
+            "task_id": "normalize"
+          },
+          {
+            "attempt": 1,
+            "event": "adapter_executed",
+            "task_id": "summary"
+          },
+          {
+            "attempt": 1,
+            "event": "adapter_executed",
+            "task_id": "flags"
+          },
+          {
+            "attempt": 1,
+            "event": "adapter_executed",
+            "task_id": "package"
+          }
+        ],
+        "unique_effects": 4
+      },
+      "naive": {
+        "adapter_calls": 4,
+        "completed_tasks": 4,
+        "duplicate_effects": 0,
+        "effect_attempts": 4,
+        "executed_units": 8,
+        "trace": [
+          {
+            "event": "claimed",
+            "task_id": "normalize"
+          },
+          {
+            "event": "adapter_executed",
+            "task_id": "normalize"
+          },
+          {
+            "event": "effect_applied",
+            "task_id": "normalize"
+          },
+          {
+            "event": "claimed",
+            "task_id": "summary"
+          },
+          {
+            "event": "adapter_executed",
+            "task_id": "summary"
+          },
+          {
+            "event": "effect_applied",
+            "task_id": "summary"
+          },
+          {
+            "event": "claimed",
+            "task_id": "flags"
+          },
+          {
+            "event": "adapter_executed",
+            "task_id": "flags"
+          },
+          {
+            "event": "effect_applied",
+            "task_id": "flags"
+          },
+          {
+            "event": "claimed",
+            "task_id": "package"
+          },
+          {
+            "event": "adapter_executed",
+            "task_id": "package"
+          },
+          {
+            "event": "effect_applied",
+            "task_id": "package"
+          }
+        ],
+        "unique_effects": 4
+      },
+      "scenario": "no_fault"
+    },
+    {
+      "durable": {
+        "adapter_calls": 4,
+        "audit": [
+          {
+            "clock": 0.0,
+            "detail": "",
+            "event": "created",
+            "seq": 1,
+            "task_id": null,
+            "token": 0
+          },
+          {
+            "clock": 1.0,
+            "detail": "worker",
+            "event": "claimed",
+            "seq": 2,
+            "task_id": "normalize",
+            "token": 1
+          },
+          {
+            "clock": 1.1,
+            "detail": "",
+            "event": "completed",
+            "seq": 3,
+            "task_id": "normalize",
+            "token": 1
+          },
+          {
+            "clock": 2.0,
+            "detail": "worker",
+            "event": "claimed",
+            "seq": 4,
+            "task_id": "summary",
+            "token": 1
+          },
+          {
+            "clock": 12.0,
+            "detail": "pending",
+            "event": "lease_expired",
+            "seq": 5,
+            "task_id": "summary",
+            "token": 1
+          },
+          {
+            "clock": 12.0,
+            "detail": "worker",
+            "event": "claimed",
+            "seq": 6,
+            "task_id": "summary",
+            "token": 2
+          },
+          {
+            "clock": 12.1,
+            "detail": "",
+            "event": "completed",
+            "seq": 7,
+            "task_id": "summary",
+            "token": 2
+          },
+          {
+            "clock": 13.0,
+            "detail": "worker",
+            "event": "claimed",
+            "seq": 8,
+            "task_id": "flags",
+            "token": 1
+          },
+          {
+            "clock": 13.1,
+            "detail": "",
+            "event": "completed",
+            "seq": 9,
+            "task_id": "flags",
+            "token": 1
+          },
+          {
+            "clock": 14.0,
+            "detail": "worker",
+            "event": "claimed",
+            "seq": 10,
+            "task_id": "package",
+            "token": 1
+          },
+          {
+            "clock": 14.1,
+            "detail": "",
+            "event": "completed",
+            "seq": 11,
+            "task_id": "package",
+            "token": 1
+          }
+        ],
+        "charged_units": 11,
+        "completed_tasks": 4,
+        "deduplicated_deliveries": 0,
+        "duplicate_effects": 0,
+        "effect_attempts": 4,
+        "executed_units": 8,
+        "reserved_units": 0,
+        "snapshot": {
+          "account": {
+            "budget": 30,
+            "id": "experiment",
+            "reserved": 0,
+            "spent": 11
+          },
+          "pending_outbox": 0,
+          "tasks": [
+            {
+              "attempts": 1,
+              "cost": 2,
+              "id": "normalize",
+              "state": "succeeded",
+              "token": 1
+            },
+            {
+              "attempts": 2,
+              "cost": 3,
+              "id": "summary",
+              "state": "succeeded",
+              "token": 2
+            },
+            {
+              "attempts": 1,
+              "cost": 2,
+              "id": "flags",
+              "state": "succeeded",
+              "token": 1
+            },
+            {
+              "attempts": 1,
+              "cost": 1,
+              "id": "package",
+              "state": "succeeded",
+              "token": 1
+            }
+          ]
+        },
+        "trace": [
+          {
+            "attempt": 1,
+            "event": "adapter_executed",
+            "task_id": "normalize"
+          },
+          {
+            "clock": 12.0,
+            "event": "process_restarted",
+            "fault": "after_claim"
+          },
+          {
+            "attempt": 2,
+            "event": "adapter_executed",
+            "task_id": "summary"
+          },
+          {
+            "attempt": 1,
+            "event": "adapter_executed",
+            "task_id": "flags"
+          },
+          {
+            "attempt": 1,
+            "event": "adapter_executed",
+            "task_id": "package"
+          }
+        ],
+        "unique_effects": 4
+      },
+      "naive": {
+        "adapter_calls": 5,
+        "completed_tasks": 4,
+        "duplicate_effects": 1,
+        "effect_attempts": 5,
+        "executed_units": 10,
+        "trace": [
+          {
+            "event": "claimed",
+            "task_id": "normalize"
+          },
+          {
+            "event": "adapter_executed",
+            "task_id": "normalize"
+          },
+          {
+            "event": "effect_applied",
+            "task_id": "normalize"
+          },
+          {
+            "event": "claimed",
+            "task_id": "summary"
+          },
+          {
+            "event": "process_restarted",
+            "fault": "after_claim"
+          },
+          {
+            "event": "claimed",
+            "task_id": "normalize"
+          },
+          {
+            "event": "adapter_executed",
+            "task_id": "normalize"
+          },
+          {
+            "event": "effect_applied",
+            "task_id": "normalize"
+          },
+          {
+            "event": "claimed",
+            "task_id": "summary"
+          },
+          {
+            "event": "adapter_executed",
+            "task_id": "summary"
+          },
+          {
+            "event": "effect_applied",
+            "task_id": "summary"
+          },
+          {
+            "event": "claimed",
+            "task_id": "flags"
+          },
+          {
+            "event": "adapter_executed",
+            "task_id": "flags"
+          },
+          {
+            "event": "effect_applied",
+            "task_id": "flags"
+          },
+          {
+            "event": "claimed",
+            "task_id": "package"
+          },
+          {
+            "event": "adapter_executed",
+            "task_id": "package"
+          },
+          {
+            "event": "effect_applied",
+            "task_id": "package"
+          }
+        ],
+        "unique_effects": 4
+      },
+      "scenario": "after_claim"
+    },
+    {
+      "durable": {
+        "adapter_calls": 5,
+        "audit": [
+          {
+            "clock": 0.0,
+            "detail": "",
+            "event": "created",
+            "seq": 1,
+            "task_id": null,
+            "token": 0
+          },
+          {
+            "clock": 1.0,
+            "detail": "worker",
+            "event": "claimed",
+            "seq": 2,
+            "task_id": "normalize",
+            "token": 1
+          },
+          {
+            "clock": 1.1,
+            "detail": "",
+            "event": "completed",
+            "seq": 3,
+            "task_id": "normalize",
+            "token": 1
+          },
+          {
+            "clock": 2.0,
+            "detail": "worker",
+            "event": "claimed",
+            "seq": 4,
+            "task_id": "summary",
+            "token": 1
+          },
+          {
+            "clock": 12.0,
+            "detail": "pending",
+            "event": "lease_expired",
+            "seq": 5,
+            "task_id": "summary",
+            "token": 1
+          },
+          {
+            "clock": 12.0,
+            "detail": "worker",
+            "event": "claimed",
+            "seq": 6,
+            "task_id": "summary",
+            "token": 2
+          },
+          {
+            "clock": 12.1,
+            "detail": "",
+            "event": "completed",
+            "seq": 7,
+            "task_id": "summary",
+            "token": 2
+          },
+          {
+            "clock": 13.0,
+            "detail": "worker",
+            "event": "claimed",
+            "seq": 8,
+            "task_id": "flags",
+            "token": 1
+          },
+          {
+            "clock": 13.1,
+            "detail": "",
+            "event": "completed",
+            "seq": 9,
+            "task_id": "flags",
+            "token": 1
+          },
+          {
+            "clock": 14.0,
+            "detail": "worker",
+            "event": "claimed",
+            "seq": 10,
+            "task_id": "package",
+            "token": 1
+          },
+          {
+            "clock": 14.1,
+            "detail": "",
+            "event": "completed",
+            "seq": 11,
+            "task_id": "package",
+            "token": 1
+          }
+        ],
+        "charged_units": 11,
+        "completed_tasks": 4,
+        "deduplicated_deliveries": 0,
+        "duplicate_effects": 0,
+        "effect_attempts": 4,
+        "executed_units": 11,
+        "reserved_units": 0,
+        "snapshot": {
+          "account": {
+            "budget": 30,
+            "id": "experiment",
+            "reserved": 0,
+            "spent": 11
+          },
+          "pending_outbox": 0,
+          "tasks": [
+            {
+              "attempts": 1,
+              "cost": 2,
+              "id": "normalize",
+              "state": "succeeded",
+              "token": 1
+            },
+            {
+              "attempts": 2,
+              "cost": 3,
+              "id": "summary",
+              "state": "succeeded",
+              "token": 2
+            },
+            {
+              "attempts": 1,
+              "cost": 2,
+              "id": "flags",
+              "state": "succeeded",
+              "token": 1
+            },
+            {
+              "attempts": 1,
+              "cost": 1,
+              "id": "package",
+              "state": "succeeded",
+              "token": 1
+            }
+          ]
+        },
+        "trace": [
+          {
+            "attempt": 1,
+            "event": "adapter_executed",
+            "task_id": "normalize"
+          },
+          {
+            "attempt": 1,
+            "event": "adapter_executed",
+            "task_id": "summary"
+          },
+          {
+            "clock": 12.0,
+            "event": "process_restarted",
+            "fault": "after_adapter"
+          },
+          {
+            "attempt": 2,
+            "event": "adapter_executed",
+            "task_id": "summary"
+          },
+          {
+            "attempt": 1,
+            "event": "adapter_executed",
+            "task_id": "flags"
+          },
+          {
+            "attempt": 1,
+            "event": "adapter_executed",
+            "task_id": "package"
+          }
+        ],
+        "unique_effects": 4
+      },
+      "naive": {
+        "adapter_calls": 6,
+        "completed_tasks": 4,
+        "duplicate_effects": 1,
+        "effect_attempts": 5,
+        "executed_units": 13,
+        "trace": [
+          {
+            "event": "claimed",
+            "task_id": "normalize"
+          },
+          {
+            "event": "adapter_executed",
+            "task_id": "normalize"
+          },
+          {
+            "event": "effect_applied",
+            "task_id": "normalize"
+          },
+          {
+            "event": "claimed",
+            "task_id": "summary"
+          },
+          {
+            "event": "adapter_executed",
+            "task_id": "summary"
+          },
+          {
+            "event": "process_restarted",
+            "fault": "after_adapter"
+          },
+          {
+            "event": "claimed",
+            "task_id": "normalize"
+          },
+          {
+            "event": "adapter_executed",
+            "task_id": "normalize"
+          },
+          {
+            "event": "effect_applied",
+            "task_id": "normalize"
+          },
+          {
+            "event": "claimed",
+            "task_id": "summary"
+          },
+          {
+            "event": "adapter_executed",
+            "task_id": "summary"
+          },
+          {
+            "event": "effect_applied",
+            "task_id": "summary"
+          },
+          {
+            "event": "claimed",
+            "task_id": "flags"
+          },
+          {
+            "event": "adapter_executed",
+            "task_id": "flags"
+          },
+          {
+            "event": "effect_applied",
+            "task_id": "flags"
+          },
+          {
+            "event": "claimed",
+            "task_id": "package"
+          },
+          {
+            "event": "adapter_executed",
+            "task_id": "package"
+          },
+          {
+            "event": "effect_applied",
+            "task_id": "package"
+          }
+        ],
+        "unique_effects": 4
+      },
+      "scenario": "after_adapter"
+    },
+    {
+      "durable": {
+        "adapter_calls": 4,
+        "audit": [
+          {
+            "clock": 0.0,
+            "detail": "",
+            "event": "created",
+            "seq": 1,
+            "task_id": null,
+            "token": 0
+          },
+          {
+            "clock": 1.0,
+            "detail": "worker",
+            "event": "claimed",
+            "seq": 2,
+            "task_id": "normalize",
+            "token": 1
+          },
+          {
+            "clock": 1.1,
+            "detail": "",
+            "event": "completed",
+            "seq": 3,
+            "task_id": "normalize",
+            "token": 1
+          },
+          {
+            "clock": 2.0,
+            "detail": "worker",
+            "event": "claimed",
+            "seq": 4,
+            "task_id": "summary",
+            "token": 1
+          },
+          {
+            "clock": 2.1,
+            "detail": "",
+            "event": "completed",
+            "seq": 5,
+            "task_id": "summary",
+            "token": 1
+          },
+          {
+            "clock": 12.0,
+            "detail": "worker",
+            "event": "claimed",
+            "seq": 6,
+            "task_id": "flags",
+            "token": 1
+          },
+          {
+            "clock": 12.1,
+            "detail": "",
+            "event": "completed",
+            "seq": 7,
+            "task_id": "flags",
+            "token": 1
+          },
+          {
+            "clock": 13.0,
+            "detail": "worker",
+            "event": "claimed",
+            "seq": 8,
+            "task_id": "package",
+            "token": 1
+          },
+          {
+            "clock": 13.1,
+            "detail": "",
+            "event": "completed",
+            "seq": 9,
+            "task_id": "package",
+            "token": 1
+          }
+        ],
+        "charged_units": 8,
+        "completed_tasks": 4,
+        "deduplicated_deliveries": 0,
+        "duplicate_effects": 0,
+        "effect_attempts": 4,
+        "executed_units": 8,
+        "reserved_units": 0,
+        "snapshot": {
+          "account": {
+            "budget": 30,
+            "id": "experiment",
+            "reserved": 0,
+            "spent": 8
+          },
+          "pending_outbox": 0,
+          "tasks": [
+            {
+              "attempts": 1,
+              "cost": 2,
+              "id": "normalize",
+              "state": "succeeded",
+              "token": 1
+            },
+            {
+              "attempts": 1,
+              "cost": 3,
+              "id": "summary",
+              "state": "succeeded",
+              "token": 1
+            },
+            {
+              "attempts": 1,
+              "cost": 2,
+              "id": "flags",
+              "state": "succeeded",
+              "token": 1
+            },
+            {
+              "attempts": 1,
+              "cost": 1,
+              "id": "package",
+              "state": "succeeded",
+              "token": 1
+            }
+          ]
+        },
+        "trace": [
+          {
+            "attempt": 1,
+            "event": "adapter_executed",
+            "task_id": "normalize"
+          },
+          {
+            "attempt": 1,
+            "event": "adapter_executed",
+            "task_id": "summary"
+          },
+          {
+            "clock": 12.0,
+            "event": "process_restarted",
+            "fault": "after_commit"
+          },
+          {
+            "attempt": 1,
+            "event": "adapter_executed",
+            "task_id": "flags"
+          },
+          {
+            "attempt": 1,
+            "event": "adapter_executed",
+            "task_id": "package"
+          }
+        ],
+        "unique_effects": 4
+      },
+      "naive": {
+        "adapter_calls": 6,
+        "completed_tasks": 4,
+        "duplicate_effects": 2,
+        "effect_attempts": 6,
+        "executed_units": 13,
+        "trace": [
+          {
+            "event": "claimed",
+            "task_id": "normalize"
+          },
+          {
+            "event": "adapter_executed",
+            "task_id": "normalize"
+          },
+          {
+            "event": "effect_applied",
+            "task_id": "normalize"
+          },
+          {
+            "event": "claimed",
+            "task_id": "summary"
+          },
+          {
+            "event": "adapter_executed",
+            "task_id": "summary"
+          },
+          {
+            "event": "effect_applied",
+            "task_id": "summary"
+          },
+          {
+            "event": "process_restarted",
+            "fault": "after_commit"
+          },
+          {
+            "event": "claimed",
+            "task_id": "normalize"
+          },
+          {
+            "event": "adapter_executed",
+            "task_id": "normalize"
+          },
+          {
+            "event": "effect_applied",
+            "task_id": "normalize"
+          },
+          {
+            "event": "claimed",
+            "task_id": "summary"
+          },
+          {
+            "event": "adapter_executed",
+            "task_id": "summary"
+          },
+          {
+            "event": "effect_applied",
+            "task_id": "summary"
+          },
+          {
+            "event": "claimed",
+            "task_id": "flags"
+          },
+          {
+            "event": "adapter_executed",
+            "task_id": "flags"
+          },
+          {
+            "event": "effect_applied",
+            "task_id": "flags"
+          },
+          {
+            "event": "claimed",
+            "task_id": "package"
+          },
+          {
+            "event": "adapter_executed",
+            "task_id": "package"
+          },
+          {
+            "event": "effect_applied",
+            "task_id": "package"
+          }
+        ],
+        "unique_effects": 4
+      },
+      "scenario": "after_commit"
+    },
+    {
+      "durable": {
+        "adapter_calls": 4,
+        "audit": [
+          {
+            "clock": 0.0,
+            "detail": "",
+            "event": "created",
+            "seq": 1,
+            "task_id": null,
+            "token": 0
+          },
+          {
+            "clock": 1.0,
+            "detail": "worker",
+            "event": "claimed",
+            "seq": 2,
+            "task_id": "normalize",
+            "token": 1
+          },
+          {
+            "clock": 1.1,
+            "detail": "",
+            "event": "completed",
+            "seq": 3,
+            "task_id": "normalize",
+            "token": 1
+          },
+          {
+            "clock": 2.0,
+            "detail": "worker",
+            "event": "claimed",
+            "seq": 4,
+            "task_id": "summary",
+            "token": 1
+          },
+          {
+            "clock": 2.1,
+            "detail": "",
+            "event": "completed",
+            "seq": 5,
+            "task_id": "summary",
+            "token": 1
+          },
+          {
+            "clock": 12.0,
+            "detail": "worker",
+            "event": "claimed",
+            "seq": 6,
+            "task_id": "flags",
+            "token": 1
+          },
+          {
+            "clock": 12.1,
+            "detail": "",
+            "event": "completed",
+            "seq": 7,
+            "task_id": "flags",
+            "token": 1
+          },
+          {
+            "clock": 13.0,
+            "detail": "worker",
+            "event": "claimed",
+            "seq": 8,
+            "task_id": "package",
+            "token": 1
+          },
+          {
+            "clock": 13.1,
+            "detail": "",
+            "event": "completed",
+            "seq": 9,
+            "task_id": "package",
+            "token": 1
+          }
+        ],
+        "charged_units": 8,
+        "completed_tasks": 4,
+        "deduplicated_deliveries": 1,
+        "duplicate_effects": 0,
+        "effect_attempts": 5,
+        "executed_units": 8,
+        "reserved_units": 0,
+        "snapshot": {
+          "account": {
+            "budget": 30,
+            "id": "experiment",
+            "reserved": 0,
+            "spent": 8
+          },
+          "pending_outbox": 0,
+          "tasks": [
+            {
+              "attempts": 1,
+              "cost": 2,
+              "id": "normalize",
+              "state": "succeeded",
+              "token": 1
+            },
+            {
+              "attempts": 1,
+              "cost": 3,
+              "id": "summary",
+              "state": "succeeded",
+              "token": 1
+            },
+            {
+              "attempts": 1,
+              "cost": 2,
+              "id": "flags",
+              "state": "succeeded",
+              "token": 1
+            },
+            {
+              "attempts": 1,
+              "cost": 1,
+              "id": "package",
+              "state": "succeeded",
+              "token": 1
+            }
+          ]
+        },
+        "trace": [
+          {
+            "attempt": 1,
+            "event": "adapter_executed",
+            "task_id": "normalize"
+          },
+          {
+            "attempt": 1,
+            "event": "adapter_executed",
+            "task_id": "summary"
+          },
+          {
+            "clock": 12.0,
+            "event": "process_restarted",
+            "fault": "after_receiver_before_ack"
+          },
+          {
+            "attempt": 1,
+            "event": "adapter_executed",
+            "task_id": "flags"
+          },
+          {
+            "attempt": 1,
+            "event": "adapter_executed",
+            "task_id": "package"
+          }
+        ],
+        "unique_effects": 4
+      },
+      "naive": {
+        "adapter_calls": 6,
+        "completed_tasks": 4,
+        "duplicate_effects": 2,
+        "effect_attempts": 6,
+        "executed_units": 13,
+        "trace": [
+          {
+            "event": "claimed",
+            "task_id": "normalize"
+          },
+          {
+            "event": "adapter_executed",
+            "task_id": "normalize"
+          },
+          {
+            "event": "effect_applied",
+            "task_id": "normalize"
+          },
+          {
+            "event": "claimed",
+            "task_id": "summary"
+          },
+          {
+            "event": "adapter_executed",
+            "task_id": "summary"
+          },
+          {
+            "event": "effect_applied",
+            "task_id": "summary"
+          },
+          {
+            "event": "process_restarted",
+            "fault": "after_receiver_before_ack"
+          },
+          {
+            "event": "claimed",
+            "task_id": "normalize"
+          },
+          {
+            "event": "adapter_executed",
+            "task_id": "normalize"
+          },
+          {
+            "event": "effect_applied",
+            "task_id": "normalize"
+          },
+          {
+            "event": "claimed",
+            "task_id": "summary"
+          },
+          {
+            "event": "adapter_executed",
+            "task_id": "summary"
+          },
+          {
+            "event": "effect_applied",
+            "task_id": "summary"
+          },
+          {
+            "event": "claimed",
+            "task_id": "flags"
+          },
+          {
+            "event": "adapter_executed",
+            "task_id": "flags"
+          },
+          {
+            "event": "effect_applied",
+            "task_id": "flags"
+          },
+          {
+            "event": "claimed",
+            "task_id": "package"
+          },
+          {
+            "event": "adapter_executed",
+            "task_id": "package"
+          },
+          {
+            "event": "effect_applied",
+            "task_id": "package"
+          }
+        ],
+        "unique_effects": 4
+      },
+      "scenario": "after_receiver_before_ack"
+    }
+  ],
+  "source_sha256": {
+    "data/workflow.json": "152e101b2fd062ed24bd22039a0e563f075b410c0c702088a21784f32d05c4e5",
+    "replaylab/engine.py": "0bb8bd84ac64a430a61d0ac0837636d4b9f27c67e126b05326059573cc35acd2",
+    "replaylab/experiment.py": "559c8c006625c364ec09fe421e5de8f7257eedb2b3535aab38f0018dd0479686"
+  }
+}

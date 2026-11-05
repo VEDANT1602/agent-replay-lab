@@ -1,0 +1,10 @@
+{
+  "description": "Original deterministic fixture; synthetic scores, no personal or customer data.",
+  "budget": 30,
+  "tasks": [
+    {"id": "normalize", "adapter": "normalize", "payload": {"values": [12, 38, 65, 91]}, "deps": [], "cost": 2, "max_attempts": 3},
+    {"id": "summary", "adapter": "summarize", "payload": {"source": "normalize"}, "deps": ["normalize"], "cost": 3, "max_attempts": 3},
+    {"id": "flags", "adapter": "flag", "payload": {"source": "normalize", "threshold": 0.6}, "deps": ["normalize"], "cost": 2, "max_attempts": 3},
+    {"id": "package", "adapter": "combine", "payload": {"summary": "summary", "flags": "flags"}, "deps": ["summary", "flags"], "cost": 1, "max_attempts": 3}
+  ]
+}
